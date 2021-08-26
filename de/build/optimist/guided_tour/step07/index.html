@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en-US"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><title>07: The first VM - Documentation</title><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="/assets/css/just-the-docs-default.css"> <script type="text/javascript" src="/assets/js/vendor/lunr.min.js"></script> <script type="text/javascript" src="/assets/js/just-the-docs.js"></script><meta name="viewport" content="width=device-width, initial-scale=1"><title>07: The first VM | Documentation</title><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="07: The first VM" /><meta property="og:locale" content="en" /><meta name="description" content="Step 7: The first VM" /><meta property="og:description" content="Step 7: The first VM" /><link rel="canonical" href="/optimist/guided_tour/step07/" /><meta property="og:url" content="/optimist/guided_tour/step07/" /><meta property="og:site_name" content="Documentation" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2021-08-26T14:39:05+00:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="07: The first VM" /> <script type="application/ld+json"> {"description":"Step 7: The first VM","url":"/optimist/guided_tour/step07/","@type":"BlogPosting","headline":"07: The first VM","dateModified":"2021-08-26T14:39:05+00:00","datePublished":"2021-08-26T14:39:05+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"/optimist/guided_tour/step07/"},"@context":"https://schema.org"}</script><body> <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"> <symbol id="svg-link" viewBox="0 0 24 24"><title>Link</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path> </svg> </symbol> <symbol id="svg-search" viewBox="0 0 24 24"><title>Search</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"> <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line> </svg> </symbol> <symbol id="svg-menu" viewBox="0 0 24 24"><title>Menu</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line> </svg> </symbol> <symbol id="svg-arrow-right" viewBox="0 0 24 24"><title>Expand</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline> </svg> </symbol> <symbol id="svg-doc" viewBox="0 0 24 24"><title>Document</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline> </svg> </symbol> </svg><div class="side-bar"><div class="site-header"> <a href="/" class="site-title lh-tight"><svg class="site-logo" width="44" height="51" viewBox="0 0 44 51" fill="none" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M21.9985 0L32.9985 6.35022L38.1104 9.30107L31.1561 13.3166L29.5221 12.3727L21.9985 8.02952L14.4749 12.3727L6.95126 16.716V25.4024V34.0888L14.4749 38.432L21.9985 42.7753L29.5221 38.432L44 30.0733V38.1043L33 44.4561L22 50.8063L11 44.4561L0 38.1043V25.4024V12.7004L11 6.34871L21.9985 0ZM21.9985 34.6597L29.1657 30.5218L36.4764 26.3009L44 21.9577V13.9267L33 20.2784L22 26.6301V34.6597H21.9985ZM28.9543 30.6441L29.1672 30.5218L28.9543 30.6441Z" fill="#111" /><path d="M21.9985 34.6588L29.1658 30.5209L36.4764 26.3L44 21.9568V13.9258L33 20.2775L22 26.6292V34.6588H21.9985ZM28.9543 30.6432L29.1673 30.5209L28.9543 30.6432Z" fill="#111" /> </svg><div class="rp_title"> Documentation</div></a> <a href="#" id="menu-button" class="site-button"> <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> </a></div><nav role="navigation" aria-label="Main" id="site-nav" class="site-nav"><div class="nav-category">IMKE</div><ul class="nav-list"><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="/imke/about/" class="nav-list-link">About iMKE</a><ul class="nav-list "><li class="nav-list-item "><a href="/imke/about/changelog-v2.17/" class="nav-list-link">iMKE Changelog v2.17</a><li class="nav-list-item "><a href="/imke/about/changelog-v2.14.8/" class="nav-list-link">iMKE Changelog v2.14.8</a><li class="nav-list-item "><a href="/imke/about/changelog-v2.13.10/" class="nav-list-link">iMKE Changelog v2.13.10</a><li class="nav-list-item "><a href="/imke/about/changelog-v2.12.4/" class="nav-list-link">iMKE Changelog v2.12.4</a><li class="nav-list-item "><a href="/imke/about/kubernetesversions/" class="nav-list-link">Supported Kubernetes Versions</a></ul><li class="nav-list-item"><a href="/imke/gettingstarted/" class="nav-list-link">Getting Started</a><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="/imke/managingprojects/" class="nav-list-link">Managing iMKE-Projects</a><ul class="nav-list "><li class="nav-list-item "><a href="/imke/managingprojects/creatingaproject/" class="nav-list-link">Creating a Project</a><li class="nav-list-item "><a href="/imke/managingprojects/projectusermanagement/" class="nav-list-link">Project User Management</a><li class="nav-list-item "><a href="/imke/managingprojects/projectserviceaccounts/" class="nav-list-link">Managing Service Account Tokens</a></ul><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="/imke/managingprojects/clusterlifecycle/" class="nav-list-link">Cluster Lifecycle</a><ul class="nav-list "><li class="nav-list-item "><a href="/imke/clusterlifecycle/creatingacluster/" class="nav-list-link">Creating a Cluster</a><li class="nav-list-item "><a href="/imke/clusterlifecycle/upgradingacluster/" class="nav-list-link">Kubernetes Updates</a><li class="nav-list-item "><a href="/imke/clusterlifecycle/openstackcredentials/" class="nav-list-link">Change Openstack Credentials</a><li class="nav-list-item "><a href="/imke/clusterlifecycle/deletingacluster/" class="nav-list-link">Deleting a Cluster</a><li class="nav-list-item "><a href="/imke/clusterlifecycle/deprecationpolicy/" class="nav-list-link">Deprecation Policy</a></ul><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="/imke/machinedeployments/" class="nav-list-link">Machine Deployments</a><ul class="nav-list "><li class="nav-list-item "><a href="/imke/machinedeployments/machinedeployment/" class="nav-list-link">Machine Deployment</a><li class="nav-list-item "><a href="/imke/machinedeployments/nodeflavors/" class="nav-list-link">Choosing Node Flavors / Sizes</a><li class="nav-list-item "><a href="/imke/machinedeployments/clusternodesusagerate/" class="nav-list-link">Cluster Nodes Usage Rate</a><li class="nav-list-item "><a href="/imke/machinedeployments/add_ssh_key/" class="nav-list-link">Add ssh key to an existing cluster</a><li class="nav-list-item "><a href="/imke/machinedeployments/updatingnodeos/" class="nav-list-link">Updating the OS of worker nodes</a></ul><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="/imke/accessmanagement/" class="nav-list-link">Access Management</a><ul class="nav-list "><li class="nav-list-item "><a href="/imke/accessmanagement/connectingtoacluster/" class="nav-list-link">Connecting to a Cluster</a><li class="nav-list-item "><a href="/imke/accessmanagement/usingrbac/" class="nav-list-link">Role-Based Access Control (RBAC)</a><li class="nav-list-item "><a href="/imke/accessmanagement/webterminal/" class="nav-list-link">The Web Terminal</a></ul><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="/imke/k8sapplications/" class="nav-list-link">Kubernetes Applications</a><ul class="nav-list "><li class="nav-list-item "><a href="/imke/k8sapplications/runningapplications/" class="nav-list-link">Running Applications in Kubernetes</a><li class="nav-list-item "><a href="/imke/k8sapplications/serviceaccounts/" class="nav-list-link">Managing Service Accounts</a><li class="nav-list-item "><a href="/imke/k8sapplications/externaldnsanddesignate/" class="nav-list-link">External-DNS with Designate</a><li class="nav-list-item "><a href="/imke/k8sapplications/timezones/" class="nav-list-link">Time Zone Management</a><li class="nav-list-item "><a href="/imke/k8sapplications/storageclasses/" class="nav-list-link">StorageClass Setup</a><li class="nav-list-item "><a href="/imke/k8sapplications/resizevolumes/" class="nav-list-link">Resizing Volumes</a></ul></ul><div class="nav-category">Optimist</div><ul class="nav-list"><li class="nav-list-item active"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="/optimist/guided_tour/" class="nav-list-link">Guided Tour</a><ul class="nav-list "><li class="nav-list-item "><a href="/optimist/guided_tour/step01/" class="nav-list-link">01: The Horizon(Dashboard)</a><li class="nav-list-item "><a href="/optimist/guided_tour/step02/" class="nav-list-link">02: Create an SSH-Key via the Horizon(Dashboard)</a><li class="nav-list-item "><a href="/optimist/guided_tour/step03/" class="nav-list-link">03: Spawn a new Stack</a><li class="nav-list-item "><a href="/optimist/guided_tour/step04/" class="nav-list-link">04: Our way to the console</a><li class="nav-list-item "><a href="/optimist/guided_tour/step05/" class="nav-list-link">05: An overview of the most important commands of the OpenStackClient</a><li class="nav-list-item "><a href="/optimist/guided_tour/step06/" class="nav-list-link">06: Create and use our own SSH-Key</a><li class="nav-list-item active"><a href="/optimist/guided_tour/step07/" class="nav-list-link active">07: The first VM</a><li class="nav-list-item "><a href="/optimist/guided_tour/step08/" class="nav-list-link">08: Delete the first VM</a><li class="nav-list-item "><a href="/optimist/guided_tour/step09/" class="nav-list-link">09: A Security Group</a><li class="nav-list-item "><a href="/optimist/guided_tour/step10/" class="nav-list-link">10: Getting access to the Internet; Creating a network</a><li class="nav-list-item "><a href="/optimist/guided_tour/step11/" class="nav-list-link">11: Prepare access to the internet; Add IPv6 to our network</a><li class="nav-list-item "><a href="/optimist/guided_tour/step12/" class="nav-list-link">12: A usable VM</a><li class="nav-list-item "><a href="/optimist/guided_tour/step13/" class="nav-list-link">13: The structured way to create an instance (with stacks)</a><li class="nav-list-item "><a href="/optimist/guided_tour/step14/" class="nav-list-link">14: Our first steps with HEAT</a><li class="nav-list-item "><a href="/optimist/guided_tour/step15/" class="nav-list-link">15: The first heat template</a><li class="nav-list-item "><a href="/optimist/guided_tour/step16/" class="nav-list-link">16: Let's get to know HEAT better</a><li class="nav-list-item "><a href="/optimist/guided_tour/step17/" class="nav-list-link">17: The network in Heat</a><li class="nav-list-item "><a href="/optimist/guided_tour/step18/" class="nav-list-link">18: Our VM will be reachable via IPv4</a><li class="nav-list-item "><a href="/optimist/guided_tour/step19/" class="nav-list-link">19: We will add IPv6 to our template</a><li class="nav-list-item "><a href="/optimist/guided_tour/step20/" class="nav-list-link">20: Build multiple VMs via HEAT</a><li class="nav-list-item "><a href="/optimist/guided_tour/step21/" class="nav-list-link">21: Start a VM via an SSD volume</a><li class="nav-list-item "><a href="/optimist/guided_tour/step22/" class="nav-list-link">22: Creating a DNS record in Designate</a><li class="nav-list-item "><a href="/optimist/guided_tour/step23/" class="nav-list-link">23: Object Storage (S3 compatible)</a><li class="nav-list-item "><a href="/optimist/guided_tour/step24/" class="nav-list-link">24: The Octavia Loadbalancer</a></ul><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="/optimist/networking/" class="nav-list-link">Networking</a><ul class="nav-list "><li class="nav-list-item "><a href="/optimist/networking/port_forwarding/" class="nav-list-link">Port Forwarding on Floating IPs</a><li class="nav-list-item "><a href="/optimist/networking/shared_networks/" class="nav-list-link">Shared Networks</a></ul><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="/optimist/storage/" class="nav-list-link">Storage</a><ul class="nav-list "><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="/optimist/storage/s3_documentation/" class="nav-list-link">S3 Compatible Object Storage</a><ul class="nav-list"><li class="nav-list-item "> <a href="/optimist/storage/s3_documentation/createanduses3credentials/" class="nav-list-link">Create and Use S3 Credentials</a><li class="nav-list-item "> <a href="/optimist/storage/s3_documentation/createanddeletebucket/" class="nav-list-link">Create and Delete a Bucket</a><li class="nav-list-item "> <a href="/optimist/storage/s3_documentation/uploadanddeleteobject/" class="nav-list-link">Upload and delete an object</a><li class="nav-list-item "> <a href="/optimist/storage/s3_documentation/versioning/" class="nav-list-link">Enable and Disable Versioning, and Delete a versioned object</a><li class="nav-list-item "> <a href="/optimist/storage/s3_documentation/security/" class="nav-list-link">S3 Security</a><li class="nav-list-item "> <a href="/optimist/storage/s3_documentation/swiftservestaticwebsite/" class="nav-list-link">Swift - Serving a Static Website</a></ul></ul><li class="nav-list-item"><a href="/optimist/migration_loadbalancer/" class="nav-list-link">Migration: Loadbalancer</a><li class="nav-list-item"><a href="/optimist/faq/" class="nav-list-link">FAQ</a><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="/optimist/specs/" class="nav-list-link">Specifications</a><ul class="nav-list "><li class="nav-list-item "><a href="/optimist/specs/flavor_specification/" class="nav-list-link">Flavor Specifications</a><li class="nav-list-item "><a href="/optimist/specs/default_quota/" class="nav-list-link">Default Quotas</a></ul><li class="nav-list-item"><a href="/optimist/changelog/" class="nav-list-link">Changelog</a></ul></nav><footer class="site-footer"> This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</footer></div><div class="main" id="top"><div id="main-header" class="main-header"><div class="search"><div class="search-input-wrap"> <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search Documentation" aria-label="Search Documentation" autocomplete="off"> <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label></div><div id="search-results" class="search-results"></div></div><ul class="language-list"><li class="language-list-item"> <a class="language-list-link active" href=" /optimist/guided_tour/step07/ " >English</a ><li class="language-list-item"> <a class="language-list-link" href=" /de/optimist/guided_tour/step07/ " >Deutsch</a ></ul></div><div id="main-content-wrap" class="main-content-wrap"><nav aria-label="Breadcrumb" class="breadcrumb-nav"><ol class="breadcrumb-nav-list"><li class="breadcrumb-nav-list-item"><a href="/optimist/guided_tour/">Guided Tour</a><li class="breadcrumb-nav-list-item"><span>07: The first VM</span></ol></nav><div id="main-content" class="main-content" role="main"><h1 id="step-7-the-first-vm"> <a href="#step-7-the-first-vm" class="anchor-heading" aria-labelledby="step-7-the-first-vm"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Step 7: The first VM</h1><h2 id="start"> <a href="#start" class="anchor-heading" aria-labelledby="start"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Start</h2><p>In the previous steps, we’ve learnt everything needed to create a VM.</p><p>On average, it’s more useful to create VMs as part of a stack, and to create these stacks via Heat or other automation tools like Terraform.</p><p>To make sure that we know the basics, this step is about creating a single VM manually.</p><h2 id="installation"> <a href="#installation" class="anchor-heading" aria-labelledby="installation"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Installation</h2><p>The basic command to create a single VM is:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openstack server create test
+</code></pre></div></div><p>If you execute this command as shown above, this error will be returned:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usage: openstack server create [-h] [-f {json,shell,table,value,yaml}]
+                               [-c COLUMN] [--max-width &lt;integer&gt;]
+                               [--print-empty] [--noindent] [--prefix PREFIX]
+                               (--image &lt;image&gt; | --volume &lt;volume&gt;) --flavor
+                               &lt;flavor&gt;
+                               [--security-group &lt;security-group-name&gt;]
+                               [--key-name &lt;key-name&gt;]
+                               [--property &lt;key=value&gt;]
+                               [--file &lt;dest-filename=source-filename&gt;]
+                               [--user-data &lt;user-data&gt;]
+                               [--availability-zone &lt;zone-name&gt;]
+                               [--block-device-mapping &lt;dev-name=mapping&gt;]
+                               [--nic &lt;net-id=net-uuid,v4-fixed-ip=ip-addr,v6-fixed-ip=ip-addr,port-id=port-uuid,auto,none&gt;]
+                               [--hint &lt;key=value&gt;]
+                               [--config-drive &lt;config-drive-volume&gt;|True]
+                               [--min &lt;count&gt;] [--max &lt;count&gt;] [--wait]
+                               &lt;server-name&gt;
+openstack server create: error: argument --flavor is required
+</code></pre></div></div><p>It tells us that we have not specified what flavor our VM should be.</p><p>To specify a flavor, we will need to add the flag <code class="language-plaintext highlighter-rouge">--flavor</code> with a flavor argument.</p><p>Let’s take a look at what flavours are available:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openstack flavor list
++--------------------------------------+------------+-------+------+-----------+-------+-----------+
+| ID                                   | Name       |   RAM | Disk | Ephemeral | VCPUs | Is Public |
++--------------------------------------+------------+-------+------+-----------+-------+-----------+
+| 090bcc91-6207-465d-aff0-bfcc10a9e063 | m1.medium  |  8192 |   20 |         0 |     4 | True      |
+| 4ade7a50-f829-4bf6-af15-266798ea8d6f | win.large  | 32768 |   80 |         0 |     8 | True      |
+| 5dd72380-088e-48cd-9a18-112cb5a9cab5 | win.small  |  8192 |   80 |         0 |     2 | True      |
+| 884d5b93-1467-4bc1-a445-ff7c74271cbd | m1.micro   |  1024 |   20 |         0 |     1 | True      |
+| b7c4fa0b-7960-4311-a86b-507dbf58e8ac | m1.small   |  4096 |   20 |         0 |     2 | True      |
+| d45e3029-8364-4e4c-beab-242e8b4622a3 | win.medium | 16384 |   80 |         0 |     4 | True      |
+| dfead62e-96a8-46e9-bdae-342ecce32d41 | win.micro  |  2048 |   80 |         0 |     1 | True      |
+| ed18c320-324a-487f-88e1-3e9eb9244509 | m1.large   | 16384 |   20 |         0 |     8 | True      |
++--------------------------------------+------------+-------+------+-----------+-------+-----------+
+</code></pre></div></div><p>If we would add <code class="language-plaintext highlighter-rouge">--flavor m1.micro</code> to our command and execute it, it would still not work as OpenStack needs some more data before it has enough to start a new VM.</p><p>Besides flavor, we need to supply the key to be installed (<code class="language-plaintext highlighter-rouge">--key-name</code>), the operating system image to install (<code class="language-plaintext highlighter-rouge">--image</code>), what network the VM will run on (<code class="language-plaintext highlighter-rouge">--network</code>) and what security group needs to be applied to it (<code class="language-plaintext highlighter-rouge">--security-group</code>).</p><p>We already created a security group in a previous step, so we will need to acquire an image and a network to create our first VM.</p><p>Let’s take a look what images are already available:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openstack image list
++--------------------------------------+---------------------------------------+--------+
+| ID                                   | Name                                  | Status |
++--------------------------------------+---------------------------------------+--------+
+| fd8ad5aa-6b33-4198-a05d-8be42fc0f20e | CentOS 7 - Latest                     | active |
+| 82242d21-d990-4fc2-92a5-c7bd7820e790 | Ubuntu 16.04 Xenial Xerus - Latest    | active |
+| 8e82fd42-3d6f-44a7-9f20-92f5661823cf | Windows Server 2012 R2 Std - Latest   | active |
+| 536c086c-d2a4-43dd-80ea-a9d05ee2b97f | Windows Server 2016 Std - Latest      | active |
+| c94ced87-a03e-4eec-89f7-48f2c0ec6cd2 | debian-9.1.5-20170910-openstack-amd64 | active |
+| b1195ddf-9336-42a7-a134-4f2e7ea57710 | iNNOVO-OPNsense-17.7.8                | active |
+| 9134b6ed-8c5a-4a9a-907e-733dc2b5f0ef | iNNOVO_pfSense 2.3.4                  | active |
++--------------------------------------+---------------------------------------+--------+
+</code></pre></div></div><p>Next up is to select a nework, let’s create a simple network with this command:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openstack network create BeispielNetzwerk
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | UP                                   |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2017-12-08T08:32:44Z                 |
+| description               |                                      |
+| dns_domain                | None                                 |
+| id                        | a783d691-7efe-4f67-9226-99a014fa8926 |
+| ipv4_address_scope        | None                                 |
+| ipv6_address_scope        | None                                 |
+| is_default                | False                                |
+| mtu                       | 1500                                 |
+| name                      | BeispielNetzwerk                     |
+| port_security_enabled     | True                                 |
+| project_id                | b15cde70d85749689e08106f973bb002     |
+| provider:network_type     | None                                 |
+| provider:physical_network | None                                 |
+| provider:segmentation_id  | None                                 |
+| qos_policy_id             | None                                 |
+| revision_number           | 2                                    |
+| router:external           | Internal                             |
+| segments                  | None                                 |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| updated_at                | 2017-12-08T08:32:44Z                 |
++---------------------------+--------------------------------------+
+</code></pre></div></div><p>Beware that this network has no internet connection, and no additional configuration, it is not something we would use for a VM we plan to actually use.</p><p>We will create a functional network in step 10.</p><p>Now to put everything together, and create an our VM. For this example, we will use the default security group, the Ubuntu 16.04 image (we’ll use the ID in the command line) and the previously created network and key:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openstack server create BeispielServer --flavor m1.small --key-name Beispiel --image 82242d21-d990-4fc2-92a5-c7bd7820e790 --network=BeispielNetzwerk --security-group default
++-----------------------------+--------------------------------------------------------+
+| Field                       | Value                                                  |
++-----------------------------+--------------------------------------------------------+
+| OS-DCF:diskConfig           | MANUAL                                                 |
+| OS-EXT-AZ:availability_zone | es1                                                    |
+| OS-EXT-STS:power_state      | NOSTATE                                                |
+| OS-EXT-STS:task_state       | scheduling                                             |
+| OS-EXT-STS:vm_state         | building                                               |
+| OS-SRV-USG:launched_at      | None                                                   |
+| OS-SRV-USG:terminated_at    | None                                                   |
+| accessIPv4                  |                                                        |
+| accessIPv6                  |                                                        |
+| addresses                   |                                                        |
+| config_drive                |                                                        |
+| created                     | 2017-12-06T14:15:02Z                                   |
+| flavor                      | m1.small (676d2587-b5aa-49eb-998d-d91c1bd6c056)        |
+| hostId                      |                                                        |
+| id                          | 44ff2688-4ce5-417d-962b-3a80199bf1bc                   |
+| image                       | cirros-tempest1 (2fbe66ef-adc8-44d0-b2e2-03d95dc36936) |
+| key_name                    | cg                                                     |
+| name                        | BeispielServer                                         |
+| progress                    | 0                                                      |
+| project_id                  | 1e775e2cc71a461991be42d4fad8a5cb                       |
+| properties                  |                                                        |
+| security_groups             | name='3265503b-ac24-4f60-a8d0-466b7c812916'            |
+| status                      | BUILD                                                  |
+| updated                     | 2017-12-06T14:15:02Z                                   |
+| user_id                     | b54fda3f4d1a484797b3ad4de9b3f4f9                       |
+| volumes_attached            |                                                        |
++-----------------------------+--------------------------------------------------------+
+</code></pre></div></div><p>To see all the possible parameters during the creation of a VM, we can use <code class="language-plaintext highlighter-rouge">--help</code>:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openstack server create --help
+usage: openstack server create [-h] [-f {json,shell,table,value,yaml}]
+                               [-c COLUMN] [--max-width &lt;integer&gt;]
+                               [--print-empty] [--noindent] [--prefix PREFIX]
+                               (--image &lt;image&gt; | --volume &lt;volume&gt;) --flavor
+                               &lt;flavor&gt;
+                               [--security-group &lt;security-group-name&gt;]
+                               [--key-name &lt;key-name&gt;]
+                               [--property &lt;key=value&gt;]
+                               [--file &lt;dest-filename=source-filename&gt;]
+                               [--user-data &lt;user-data&gt;]
+                               [--availability-zone &lt;zone-name&gt;]
+                               [--block-device-mapping &lt;dev-name=mapping&gt;]
+                               [--nic &lt;net-id=net-uuid,v4-fixed-ip=ip-addr,v6-fixed-ip=ip-addr,port-id=port-uuid,auto,none&gt;]
+                               [--hint &lt;key=value&gt;]
+                               [--config-drive &lt;config-drive-volume&gt;|True]
+                               [--min &lt;count&gt;] [--max &lt;count&gt;] [--wait]
+                               &lt;server-name&gt;
+
+Create a new server
+
+positional arguments:
+  &lt;server-name&gt;         New server name
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --image &lt;image&gt;       Create server boot disk from this image (name or ID)
+  --volume &lt;volume&gt;     Create server using this volume as the boot disk (name
+                        or ID)
+  --flavor &lt;flavor&gt;     Create server with this flavor (name or ID)
+  --security-group &lt;security-group-name&gt;
+                        Security group to assign to this server (name or ID)
+                        (repeat option to set multiple groups)
+  --key-name &lt;key-name&gt;
+                        Keypair to inject into this server (optional
+                        extension)
+  --property &lt;key=value&gt;
+                        Set a property on this server (repeat option to set
+                        multiple values)
+  --file &lt;dest-filename=source-filename&gt;
+                        File to inject into image before boot (repeat option
+                        to set multiple files)
+  --user-data &lt;user-data&gt;
+                        User data file to serve from the metadata server
+  --availability-zone &lt;zone-name&gt;
+                        Select an availability zone for the server
+  --block-device-mapping &lt;dev-name=mapping&gt;
+                        Map block devices; map is
+                        &lt;id&gt;:&lt;type&gt;:&lt;size(GB)&gt;:&lt;delete_on_terminate&gt; (optional
+                        extension)
+  --nic &lt;net-id=net-uuid,v4-fixed-ip=ip-addr,v6-fixed-ip=ip-addr,port-id=port-uuid,auto,none&gt;
+                        Create a NIC on the server. Specify option multiple
+                        times to create multiple NICs. Either net-id or port-
+                        id must be provided, but not both. net-id: attach NIC
+                        to network with this UUID, port-id: attach NIC to port
+                        with this UUID, v4-fixed-ip: IPv4 fixed address for
+                        NIC (optional), v6-fixed-ip: IPv6 fixed address for
+                        NIC (optional), none: (v2.37+) no network is attached,
+                        auto: (v2.37+) the compute service will automatically
+                        allocate a network. Specifying a --nic of auto or none
+                        cannot be used with any other --nic value.
+  --hint &lt;key=value&gt;    Hints for the scheduler (optional extension)
+  --config-drive &lt;config-drive-volume&gt;|True
+                        Use specified volume as the config drive, or 'True' to
+                        use an ephemeral drive
+  --min &lt;count&gt;         Minimum number of servers to launch (default=1)
+  --max &lt;count&gt;         Maximum number of servers to launch (default=1)
+  --wait                Wait for build to complete
+
+output formatters:
+  output formatter options
+
+  -f {json,shell,table,value,yaml}, --format {json,shell,table,value,yaml}
+                        the output format, defaults to table
+  -c COLUMN, --column COLUMN
+                        specify the column(s) to include, can be repeated
+
+table formatter:
+  --max-width &lt;integer&gt;
+                        Maximum display width, &lt;1 to disable. You can also use
+                        the CLIFF_MAX_TERM_WIDTH environment variable, but the
+                        parameter takes precedence.
+  --print-empty         Print empty table if there is no data to show.
+
+json formatter:
+  --noindent            whether to disable indenting the JSON
+
+shell formatter:
+  a format a UNIX shell can parse (variable="value")
+
+  --prefix PREFIX       add a prefix to all variable names
+</code></pre></div></div><h2 id="conclusion"> <a href="#conclusion" class="anchor-heading" aria-labelledby="conclusion"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Conclusion</h2><p>We have now created our first Instance, and used some basic OpenStack commands. In Step 8 we will delete this Instance.</p><hr><footer> <br/><br/><br/><div class="footer-navigation-links"> <a class="footer-navigation-link footer-navigation-link--previous" href="/optimist/guided_tour/step06/"> <svg class="footer-navigation-link__icon" viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg> <span class="footer-navigation-link__sublabel">Previous</span> <span class="footer-navigation-link__label">06: Create and use our own SSH-Key</span> </a> <a class="footer-navigation-link footer-navigation-link--next" href="/optimist/guided_tour/step08/"> <svg class="footer-navigation-link__icon" viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg> <span class="footer-navigation-link__sublabel">Next</span> <span class="footer-navigation-link__label">08: Delete the first VM</span> </a></div><div class="footer-links"><div class=footer-hosted-with-love> <a href="https://github.com/gecio/gecio.github.io" target="_blank" rel="noopener noreferrer" >Hosted with love on GitHub</a></div><div class="footer-external-links"><ul><li class="footer-external-link"> <a href="https://gec.io" target="_blank" rel="noopener noreferrer" >Website</a ><li class="footer-external-link"> <a href="https://gec.io/impressum/" target="_blank" rel="noopener noreferrer" >Imprint</a ><li class="footer-external-link"> <a href="https://gec.io/datenschutz/" target="_blank" rel="noopener noreferrer" >Data Privacy</a ></ul></div></div></footer></div></div><div class="search-overlay"></div></div>
